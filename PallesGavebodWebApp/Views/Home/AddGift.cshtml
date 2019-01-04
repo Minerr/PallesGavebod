@@ -1,0 +1,64 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model PallesGavebodWebApp.Models.Gift
+
+@{
+	ViewData["Title"] = "Add Gift";
+}
+
+@section Scripts {
+
+	<script>
+		const API_URL = "http://localhost:58175/api/Gifts";
+		const FORM = document.querySelector("#giftForm");
+		const FORM_TITLE = document.querySelector("#giftFormTitle");
+		const FORM_DESCRIPTION = document.querySelector("#giftFormDescription");
+		const FORM_BOYS = document.querySelector("#giftFormBoys");
+		const FORM_GIRLS = document.querySelector("#giftFormGirls");
+
+
+		function SendPostRequest()
+		{
+			let request = new XMLHttpRequest();
+
+			let gift = {
+				"Title":		FORM_TITLE.value,
+				"Description":	FORM_DESCRIPTION.value,
+				"BoyGift":		FORM_BOYS.value,
+				"GirlGift":		FORM_GIRLS.value,
+			};
+
+			request.open("POST", API_URL, true);
+			request.send(JSON.stringify(gift));
+		}
+
+	</script>
+}
+
+
+<div id="giftForm" class="card">
+	<div class="card-header">
+		<h3 class="card-title">Add Gift</h3>
+	</div>
+	<div class="card-body">
+		<div class="form-group">
+			<h3 class="card-text">Title</h3>
+			<input type="text" class="form-control" id="giftFormTitle" placeholder="Add title..." />
+		</div>
+		<div class="form-group">
+			<h3 class="card-text">Description</h3>
+			<textarea class="form-control" id="giftFormDescription" placeholder="Add description..."></textarea>
+		</div>
+		<div class="form-group">
+			<h3 class="card-text">Gender</h3>
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" id="giftFormBoys" />
+				<label class="form-check-label" for="giftFormBoy">For boys</label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" id="giftFormGirls" />
+				<label class="form-check-label" for="giftFormGirl">For girls</label>
+			</div>
+		</div>
+		<button class="btn btn-primary" onclick="SendPostRequest()">Add gift</button>
+	</div>
+</div>

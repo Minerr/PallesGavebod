@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using Microsoft.EntityFrameworkCore;
+using PallesGavebodWebApp.Models;
+
 namespace PallesGavebodWebApp
 {
 	public class Startup
@@ -29,6 +32,9 @@ namespace PallesGavebodWebApp
 				options.CheckConsentNeeded = context => true;
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
+
+			services.AddDbContext<MainDbContext>(options =>
+				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

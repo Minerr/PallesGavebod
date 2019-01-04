@@ -1,0 +1,105 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+	ViewData["Title"] = "Overview";
+}
+
+@section Scripts {
+
+	<script>
+
+		const API_URL = "http://localhost:58175/api/Gifts";
+
+		const CONTAINER = document.querySelector("#giftContainer");
+
+		var request = new XMLHttpRequest();
+		// Open a new connection, using the GET request on the URL endpoint
+		request.open("GET", API_URL, true);
+
+		request.onload = function ()
+		{
+			// Begin accessing JSON data here
+
+			var data = JSON.parse(this.response);
+			console.log(data);
+
+
+			data.forEach(gift => {
+
+				// Create the card for the gift. 
+				// A bootstrap card needs a container(card class),
+				// then a container for header and body.
+				let card = document.createElement("div");
+				card.setAttribute("class", "card mr-3");
+
+				let cardHeader = document.createElement("div");
+				cardHeader.setAttribute("class", "card-header d-flex");
+
+				let cardBody = document.createElement("div");
+				cardBody.setAttribute("class", "card-body");
+
+				let cardFooter = document.createElement("div");
+				cardFooter.setAttribute("class", "card-footer");
+
+				// Title to display in the header
+				let cardTitle = document.createElement("h5");
+				cardTitle.setAttribute("class", "card-title");
+				cardTitle.innerHTML = "#" + gift.giftNumber + " " + gift.title;
+
+				// Description to display in the body
+				let cardDescription = document.createElement("p");
+				cardDescription.setAttribute("class", "card-text");
+				cardDescription.innerHTML = gift.description;
+
+				// Date to display in the footer
+				let cardDate = document.createElement("p");
+				cardDate.setAttribute("class", "card-text text-secondary");
+				cardDate.innerHTML = "Added on: " + gift.creationDate;
+
+
+				// Girl or boy tags
+				let cardBoyTag = document.createElement("span");
+				cardBoyTag.setAttribute("class", "badge badge-primary");
+				cardBoyTag.innerHTML = "For boys";
+
+				let cardGirlTag = document.createElement("span");
+				cardGirlTag.setAttribute("class", "badge badge-danger");
+				cardGirlTag.innerHTML = "For girls";
+
+
+				// Append the variables to the card header, body or footer
+				cardHeader.appendChild(cardTitle);
+				cardBody.appendChild(cardDescription);
+				cardFooter.appendChild(cardDate);
+
+				// If the gift is for boys or girls, append the tags to the footer.
+				if (gift.boyGift) {
+					cardFooter.appendChild(cardBoyTag);
+				}
+				if (gift.girlGift) {
+					cardFooter.appendChild(cardGirlTag);
+				}
+
+				// Append the header, body or footer to the card container
+				card.appendChild(cardHeader);
+				card.appendChild(cardBody);
+				card.appendChild(cardFooter);
+
+				CONTAINER.appendChild(card);
+			});
+		}
+
+		// When the page is ready to display
+		$(document).ready(function ()
+		{
+			// Send request
+			request.send();
+		});
+
+	</script>
+}
+
+
+<div id="giftContainer" class="d-flex">
+
+</div>

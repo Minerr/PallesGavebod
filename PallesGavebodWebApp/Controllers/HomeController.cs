@@ -10,6 +10,13 @@ namespace PallesGavebodWebApp.Controllers
 {
 	public class HomeController : Controller
 	{
+		private MainDbContext _context;
+
+		public HomeController(MainDbContext mainDbContext)
+		{
+			_context = mainDbContext;
+		}
+
 		public IActionResult Index()
 		{
 			return View();
@@ -20,10 +27,20 @@ namespace PallesGavebodWebApp.Controllers
 			return View();
 		}
 
+		public IActionResult Overview()
+		{
+			return View();
+		}
+
+		public IActionResult AddGift()
+		{
+			return View();
+		}
+
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		}
+		} 
 	}
 }
