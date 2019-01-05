@@ -26,8 +26,13 @@ namespace PallesGavebodWebApp.Controllers
 		{
 			return View();
 		}
-
+		
 		public IActionResult Overview()
+		{
+			return View();
+		}
+
+		public IActionResult OverviewGirlgifts()
 		{
 			return View();
 		}

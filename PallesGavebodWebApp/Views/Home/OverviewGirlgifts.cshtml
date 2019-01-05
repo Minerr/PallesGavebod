@@ -1,7 +1,7 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
-	ViewData["Title"] = "Overview of all gifts";
+	ViewData["Title"] = "Overview of gifts for girls";
 }
 
 @section Scripts {
@@ -11,7 +11,7 @@
 		const CONTAINER = document.querySelector("#giftContainer");
 
 		var request = new XMLHttpRequest();
-		request.open("GET", API_URL, true);
+		request.open("GET", API_URL + "/OnlyFor/girl", true); // call HttpGet("GirlsOnly") in api/Gifts
 		request.onload = function () // When the event onload triggers, convert response into readable array of gifts and display them
 		{
 			var data = JSON.parse(this.response);
@@ -21,7 +21,8 @@
 		}
 
 		// When the page is ready to display, send the XMLHttpRequest
-		$(document).ready(function () {
+		$(document).ready(function ()
+		{
 			request.send();
 		});
 

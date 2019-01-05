@@ -31,8 +31,14 @@
 						<li class="nav-item">
 							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Overview">Overview</a>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Dropdown
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Overview">All gifts</a>
+								<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="OverviewGirlgifts">Girl gifts only</a>
+							</div>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AddGift">Add Gift</a>
